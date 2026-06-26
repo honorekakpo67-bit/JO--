@@ -1,0 +1,308 @@
+/* ============================================================
+   RESPONSIVE.CSS — 1xbet Vue3
+   Import dans main.ts APRÈS les autres CSS :
+   import './assets/responsive.css'
+   ============================================================ */
+
+/* ─── RESET BOX-SIZING ───────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ============================================================
+   DESKTOP LARGE (≤ 1280px) — réduction sidebars
+   ============================================================ */
+@media (max-width: 1280px) {
+  :root {
+    --layout-sidebar-size: 13rem;
+  }
+
+  .layout-sidebar--left[data-v-45eaa3ba],
+  .layout-sidebar--right[data-v-45eaa3ba] {
+    width: 13rem !important;
+  }
+
+  main.betting-content,
+  .betting-main {
+    margin-left: 13rem !important;
+    margin-right: 13rem !important;
+  }
+}
+
+/* ============================================================
+   TABLETTE (≤ 1024px) — sidebars masquées, plein écran
+   ============================================================ */
+@media (max-width: 1024px) {
+
+  /* — Sidebars cachées — */
+  .layout-sidebar--left,
+  .layout-sidebar--right,
+  .layout-sidebar,
+  .betting-left-aside,
+  .betting-right-aside,
+  .layout-sidebar--left[data-v-45eaa3ba],
+  .layout-sidebar--right[data-v-45eaa3ba] {
+    display: none !important;
+  }
+
+  /* — Contenu central pleine largeur — */
+  .betting-main,
+  main.betting-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* — Layout flex → block — */
+  .layout,
+  .layout--has-both-sidebars,
+  .betting-layout-app {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* — Header sticky (pas fixed) — */
+  .layout-content__header[data-v-52580f63] {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+  }
+
+  /* — Nav secondaire cachée — */
+  .header-double-row-navbar,
+  .header__bottom {
+    display: none !important;
+  }
+
+  /* — Padding bas pour bottom nav (56px) — */
+  .layout-content__app[data-v-52580f63] {
+    padding-bottom: 56px !important;
+    padding-top: 0 !important;
+  }
+
+  /* — Coupon (panier) fixé en bas — */
+  .coupon-app {
+    position: fixed !important;
+    bottom: 56px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-height: 50vh !important;
+    overflow-y: auto !important;
+    z-index: 900 !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+}
+
+/* ============================================================
+   MOBILE (≤ 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* — Header — */
+  .header,
+  header.header {
+    min-height: auto !important;
+    padding: 0 !important;
+  }
+
+  .header-top__row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 6px 10px !important;
+    gap: 6px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  /* — Logo — */
+  .header-logo,
+  .header-logo--indented {
+    flex-shrink: 0 !important;
+  }
+
+  .header__img {
+    max-width: 80px !important;
+    height: auto !important;
+  }
+
+  /* — Boutons header (inscription / connexion) — */
+  .user-control-dashboard,
+  .user-control-dashboard--padding-right {
+    gap: 4px !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+  }
+
+  .user-control-dashboard .ui-button {
+    font-size: 10px !important;
+    padding: 3px 8px !important;
+    height: auto !important;
+    min-height: 28px !important;
+  }
+
+  .ui-button--theme-accent {
+    font-size: 10px !important;
+    padding: 3px 8px !important;
+  }
+
+  /* — Toolbar settings (langue, etc.) — */
+  .app-settings-toolbar {
+    gap: 4px !important;
+  }
+
+  .app-settings-toolbar-dropdown__trigger {
+    font-size: 11px !important;
+    padding: 2px 4px !important;
+  }
+
+  /* — Matchs dashboard — */
+  .dashboard-game {
+    padding: 8px !important;
+  }
+
+  .dashboard-game-block__teams {
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+
+  .dashboard-game-team-info__name {
+    font-size: 12px !important;
+  }
+
+  .dashboard-game-info__date,
+  .dashboard-game-info__time {
+    font-size: 11px !important;
+  }
+
+  /* — Bannière promo — */
+  .betting-main-promo-desktop,
+  .betting-main__promo,
+  .banners-client-widget {
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .banners-client-widget img,
+  .betting-main__promo img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+  }
+
+  /* — Tabs sport (scroll horizontal) — */
+  .header-navigation-list,
+  .download-apps-widget-tabs,
+  .coupon-app__tabs {
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .header-navigation-list::-webkit-scrollbar,
+  .download-apps-widget-tabs::-webkit-scrollbar,
+  .coupon-app__tabs::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .header-navigation-list__item {
+    flex-shrink: 0 !important;
+  }
+
+  /* — SEO module — */
+  .layout-content__seo {
+    padding: 8px !important;
+    font-size: 12px !important;
+  }
+
+  /* — Footer — */
+  .layout-content__footer {
+    padding: 12px 10px !important;
+  }
+
+  /* — Inscription widget — */
+  .registration-layout-widget {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 12px !important;
+  }
+
+  .registration-layout-widget-form__tabs {
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    scrollbar-width: none !important;
+  }
+}
+
+/* ============================================================
+   PETITS MOBILES (≤ 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+
+  .header__img {
+    max-width: 68px !important;
+  }
+
+  .header-top__row {
+    padding: 4px 8px !important;
+    gap: 4px !important;
+  }
+
+  .user-control-dashboard .ui-button,
+  .ui-button--theme-accent {
+    font-size: 9px !important;
+    padding: 2px 6px !important;
+    min-height: 24px !important;
+  }
+
+  /* Cacher certains éléments moins importants */
+  .user-control-dashboard-payment,
+  .user-control-dashboard-ticket {
+    display: none !important;
+  }
+
+  /* — Matchs encore plus compacts — */
+  .dashboard-game {
+    padding: 6px !important;
+  }
+
+  .dashboard-game-team-info__name {
+    font-size: 11px !important;
+  }
+
+  /* — Express day games — */
+  .express-day-game {
+    padding: 6px !important;
+  }
+
+  .express-day-game-player__ico,
+  .express-day-game-champ__ico {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+/* ============================================================
+   TRÈS PETITS MOBILES (≤ 360px)
+   ============================================================ */
+@media (max-width: 360px) {
+
+  .header-top__row {
+    padding: 4px 6px !important;
+  }
+
+  .header__img {
+    max-width: 60px !important;
+  }
+
+  .app-settings-toolbar-dropdown__trigger {
+    display: none !important;
+  }
+
+  .user-control-dashboard .ui-button {
+    font-size: 8px !important;
+    padding: 2px 5px !important;
+  }
+}

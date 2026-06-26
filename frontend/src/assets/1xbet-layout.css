@@ -1,0 +1,168 @@
+:root {
+  --header-height: 96;
+  --vh: 9.27px;
+  --fz: 16;
+  --layout-gutter: 0.5rem;
+  --gutter: 0.5rem;
+  --layout-sidebar-size: 15.625rem;
+}
+
+/* =============================================
+   LAYOUT 3 COLONNES — position: fixed
+   Remplace le sticky + grille original qui
+   dépend de variables CSS manquantes.
+   ============================================= */
+
+/* Header fixe en haut */
+.layout-content__header[data-v-52580f63] {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+}
+
+header.header {
+  width: 100% !important;
+}
+
+footer.footer {
+  width: 100% !important;
+  position: sticky;
+  flex-shrink: 0;
+
+}
+
+/* HEADER_HEIGHT est unitless (96) car l'original l'utilise
+   dans calc(var(--header-height)/var(--fz)*1em).
+   On le convertit en px avec calc(var(--header-height) * 1px). */
+
+/* Conteneur app : padding-top pour compenser le header fixe */
+.layout-content__app[data-v-52580f63] {
+  box-sizing: border-box !important;
+  padding-top: calc(var(--header-height) * 1px) !important;
+  min-height: 100vh !important;
+}
+
+/* Sidebar gauche : fixed à gauche */
+.layout-sidebar--left[data-v-45eaa3ba] {
+  position: fixed !important;
+  left: 0 !important;
+  top: calc(var(--header-height) * 1px) !important;
+  width: var(--layout-sidebar-size) !important;
+  height: calc(100vh - calc(var(--header-height) * 1px)) !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+  z-index: 500 !important;
+}
+
+/* Sidebar droit : fixed à droite */
+.layout-sidebar--right[data-v-45eaa3ba] {
+  position: fixed !important;
+  right: 0 !important;
+  top: calc(var(--header-height) * 1px) !important;
+  width: var(--layout-sidebar-size) !important;
+  height: calc(100vh - calc(var(--header-height) * 1px)) !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+  z-index: 400 !important;
+}
+
+/* Contenu central : marges pour éviter les sidebars */
+main.betting-content {
+  margin-top: 0 !important;
+  margin-left: var(--layout-sidebar-size) !important;
+  margin-right: var(--layout-sidebar-size) !important;
+  min-height: calc(100vh - calc(var(--header-height) * 1px)) !important;
+}
+
+/* Désactiver la grille : les sidebars sont fixed, plus besoin de grid */
+.layout[data-v-374493f5] {
+  display: block !important;
+  min-height: auto !important;
+  padding: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 0 !important;
+  -moz-column-gap: 0 !important;
+  column-gap: 0 !important;
+}
+
+/* =============================================
+   RESPONSIVE — Tablette & Mobile
+   ============================================= */
+
+/* Tablette paysage / petits écrans (< 1280px) */
+@media (max-width: 1279px) {
+  .layout-sidebar--left[data-v-45eaa3ba] {
+    width: 13rem !important;
+  }
+  .layout-sidebar--right[data-v-45eaa3ba] {
+    width: 13rem !important;
+  }
+  main.betting-content {
+    margin-left: 13rem !important;
+    margin-right: 13rem !important;
+  }
+}
+
+/* Mobile / Tablette portrait (< 1024px) */
+@media (max-width: 1023px) {
+  /* Sidebars : cachées */
+  .layout-sidebar--left[data-v-45eaa3ba] {
+    display: none !important;
+  }
+  .layout-sidebar--right[data-v-45eaa3ba] {
+    display: none !important;
+  }
+
+  /* Contenu central : plein écran */
+  main.betting-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Header : plus compact */
+  .layout-content__header[data-v-52580f63] {
+    position: sticky !important;
+  }
+
+  header.header {
+    min-height: auto !important;
+  }
+
+  /* Navigation principale : cachée (remplacée par la bottom nav) */
+  .header-double-row-navbar {
+    display: none !important;
+  }
+
+  /* Padding en bas pour compenser la bottom nav fixe (56px) */
+  .layout-content__app[data-v-52580f63] {
+    padding-bottom: 56px !important;
+  }
+}
+
+/* Petits mobiles (< 400px) */
+@media screen and (max-width: 400px) {
+  .header-top__row {
+    flex-wrap: wrap !important;
+    gap: 0.25rem !important;
+  }
+
+  .header__logo {
+    max-width: 80px !important;
+  }
+
+  .header-logo__img {
+    max-width: 80px !important;
+  }
+
+  .user-control-dashboard {
+    gap: 0.25rem !important;
+  }
+
+  .user-control-dashboard .ui-button {
+    font-size: 10px !important;
+    padding: 2px 6px !important;
+  }
+}
