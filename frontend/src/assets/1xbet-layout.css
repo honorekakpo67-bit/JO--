@@ -5,12 +5,11 @@
   --layout-gutter: 0.5rem;
   --gutter: 0.5rem;
   --layout-sidebar-size: 15.625rem;
+  --footer-height: 350px; /* Hauteur approximative du footer */
 }
 
 /* =============================================
    LAYOUT 3 COLONNES — position: fixed
-   Remplace le sticky + grille original qui
-   dépend de variables CSS manquantes.
    ============================================= */
 
 /* Header fixe en haut */
@@ -28,55 +27,57 @@ header.header {
 
 footer.footer {
   width: 100% !important;
-  position: sticky;
-  flex-shrink: 0;
-
+  position: relative !important;
+  flex-shrink: 0 !important;
+  margin-top: auto !important;
 }
 
-/* HEADER_HEIGHT est unitless (96) car l'original l'utilise
-   dans calc(var(--header-height)/var(--fz)*1em).
-   On le convertit en px avec calc(var(--header-height) * 1px). */
-
-/* Conteneur app : padding-top pour compenser le header fixe */
+/* Conteneur app */
 .layout-content__app[data-v-52580f63] {
   box-sizing: border-box !important;
   padding-top: calc(var(--header-height) * 1px) !important;
   min-height: 100vh !important;
+  padding-bottom: calc(var(--footer-height) * 1px) !important;
 }
 
-/* Sidebar gauche : fixed à gauche */
+/* =============================================
+   SIDEBARS — HAUTEUR LIMITÉE POUR S'ARRÊTER AVANT LE FOOTER
+   ============================================= */
+
 .layout-sidebar--left[data-v-45eaa3ba] {
   position: fixed !important;
   left: 0 !important;
   top: calc(var(--header-height) * 1px) !important;
   width: var(--layout-sidebar-size) !important;
-  height: calc(100vh - calc(var(--header-height) * 1px)) !important;
-  max-height: none !important;
+  height: calc(100vh - calc(var(--header-height) * 1px) - calc(var(--footer-height) * 1px)) !important;
+  max-height: calc(100vh - calc(var(--header-height) * 1px) - calc(var(--footer-height) * 1px)) !important;
   overflow-y: auto !important;
   z-index: 500 !important;
+  /* PAS DE bottom: 0 */
 }
 
-/* Sidebar droit : fixed à droite */
 .layout-sidebar--right[data-v-45eaa3ba] {
   position: fixed !important;
   right: 0 !important;
   top: calc(var(--header-height) * 1px) !important;
   width: var(--layout-sidebar-size) !important;
-  height: calc(100vh - calc(var(--header-height) * 1px)) !important;
-  max-height: none !important;
+  height: calc(100vh - calc(var(--header-height) * 1px) - calc(var(--footer-height) * 1px)) !important;
+  max-height: calc(100vh - calc(var(--header-height) * 1px) - calc(var(--footer-height) * 1px)) !important;
   overflow-y: auto !important;
   z-index: 400 !important;
+  /* PAS DE bottom: 0 */
 }
 
-/* Contenu central : marges pour éviter les sidebars */
+/* Contenu central */
 main.betting-content {
   margin-top: 0 !important;
   margin-left: var(--layout-sidebar-size) !important;
   margin-right: var(--layout-sidebar-size) !important;
   min-height: calc(100vh - calc(var(--header-height) * 1px)) !important;
+  padding-bottom: calc(var(--footer-height) * 1px) !important;
 }
 
-/* Désactiver la grille : les sidebars sont fixed, plus besoin de grid */
+/* Désactiver la grille */
 .layout[data-v-374493f5] {
   display: block !important;
   min-height: auto !important;
@@ -89,10 +90,9 @@ main.betting-content {
 }
 
 /* =============================================
-   RESPONSIVE — Tablette & Mobile
+   RESPONSIVE
    ============================================= */
 
-/* Tablette paysage / petits écrans (< 1280px) */
 @media (max-width: 1279px) {
   .layout-sidebar--left[data-v-45eaa3ba] {
     width: 13rem !important;
@@ -106,61 +106,45 @@ main.betting-content {
   }
 }
 
-/* Mobile / Tablette portrait (< 1024px) */
 @media (max-width: 1023px) {
-  /* Sidebars : cachées */
   .layout-sidebar--left[data-v-45eaa3ba] {
     display: none !important;
   }
   .layout-sidebar--right[data-v-45eaa3ba] {
     display: none !important;
   }
-
-  /* Contenu central : plein écran */
   main.betting-content {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
-
-  /* Header : plus compact */
   .layout-content__header[data-v-52580f63] {
     position: sticky !important;
   }
-
   header.header {
     min-height: auto !important;
   }
-
-  /* Navigation principale : cachée (remplacée par la bottom nav) */
   .header-double-row-navbar {
     display: none !important;
   }
-
-  /* Padding en bas pour compenser la bottom nav fixe (56px) */
   .layout-content__app[data-v-52580f63] {
     padding-bottom: 56px !important;
   }
 }
 
-/* Petits mobiles (< 400px) */
 @media screen and (max-width: 400px) {
   .header-top__row {
     flex-wrap: wrap !important;
     gap: 0.25rem !important;
   }
-
   .header__logo {
     max-width: 80px !important;
   }
-
   .header-logo__img {
     max-width: 80px !important;
   }
-
   .user-control-dashboard {
     gap: 0.25rem !important;
   }
-
   .user-control-dashboard .ui-button {
     font-size: 10px !important;
     padding: 2px 6px !important;
